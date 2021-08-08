@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Card, Grid, Container, Avatar, Typography, Button, CardHeader, CardActions, CardContent } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Favorite, ThumbDown, ThumbUp, Visibility } from '@material-ui/icons';
@@ -7,12 +7,12 @@ const useStyles = makeStyles((theme: Theme) =>
 createStyles({
     card: {
         padding: "1rem",
-        margin: "1rem",
+        margin: "1rem 0 1rem 0"
     }
 }),
 );
 
-export default function Post() {
+export default function Post(props) {
     const classes = useStyles();
     return(
         <Container maxWidth="md">
@@ -94,6 +94,7 @@ export default function Post() {
                     </Grid>
                 </CardActions>
         </Card>
+        {props.children}
         </Container>
     )
 }
