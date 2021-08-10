@@ -1,13 +1,17 @@
 import React from 'react';
-import { Card, Grid, Container, Avatar, Typography, Button, CardHeader, CardActions, CardContent } from "@material-ui/core";
+import { Card, Grid, Container, Avatar, Typography, Button, CardHeader, CardActions, CardContent, Select, MenuItem, InputLabel } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Favorite, ThumbDown, ThumbUp, Visibility } from '@material-ui/icons';
+import { isClassExpression } from 'typescript';
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
     card: {
         padding: "1rem",
         margin: "1rem 0 1rem 0"
+    },
+    alignRight: {
+        marginRight: 0
     }
 }),
 );
@@ -94,6 +98,18 @@ export default function Post(props) {
                     </Grid>
                 </CardActions>
         </Card>
+        
+        <Grid container justifyContent="flex-end" alignItems="center" spacing={2}>
+            <Grid item>
+                <InputLabel id="comments-sort">Trier par</InputLabel>
+            </Grid>
+            <Grid item>
+                <Select labelId="comment-sort">
+                    <MenuItem value="top">Pertinence</MenuItem>
+                    <MenuItem value="date">Date</MenuItem>
+                </Select>
+            </Grid>
+        </Grid>
         {props.children}
         </Container>
     )
