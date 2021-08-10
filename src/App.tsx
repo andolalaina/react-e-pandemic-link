@@ -2,6 +2,7 @@ import React from 'react';
 import Post from './components/Post';
 import Comment from './components/Comment';
 import Header from './components/Header';
+import Search from './components/Search'
 
 import { AppBar, Button, createStyles, makeStyles, Paper, Theme, Toolbar, Typography, Tabs, Tab, Grid } from '@material-ui/core';
 import { AccountCircle, Menu } from '@material-ui/icons';
@@ -14,6 +15,7 @@ export default function App() {
   return (
     <div>
       <Header/>
+      <Search></Search>
       <Post></Post>
       <Post>
         <Comment/>
