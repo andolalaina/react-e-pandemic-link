@@ -13,21 +13,21 @@ const useStyles = makeStyles((theme: Theme) =>
         })
 );
 
-export default function Comment() {
+export default function Comment(props) {
     const classes = useStyles();
     return (
         <Card
         className={classes.card}
         >
             <CardHeader
-            avatar={<Avatar/>}
-            title={<Typography variant="body1">Prénom Nom</Typography>}/>
+            avatar={<Avatar src={props.owner.picture.thumbnail}/>}
+            title={<Typography variant="body1">{props.owner.name.first} {props.owner.name.last}</Typography>}/>
             <CardContent>
-                <Typography variant="caption">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ratione cumque omnis repellat tenetur eligendi. Enim assumenda quia commodi ut cupiditate odit aspernatur officiis delectus earum laboriosam, modi suscipit et iste!</Typography>
+                <Typography variant="caption">{props.commentText}</Typography>
             </CardContent>
             <CardActions>
                 <Grid container direction="row" justifyContent="flex-end" alignItems="flex-start">
-                    <Button startIcon={<Favorite/>} disabled>100k</Button>
+                    <Button startIcon={<Favorite/>} disabled>{props.likes}</Button>
                     <Button variant="outlined" color="secondary">J'adore</Button>
                 </Grid>
             </CardActions>
