@@ -1,8 +1,16 @@
-import { Button, Paper, Container, Grid, TextField, Typography } from "@material-ui/core";
+import { FormLabel, FormControlLabel, Radio, Button, Paper, Container, Grid, TextField, Typography, Select, MenuItem, FormControl, InputLabel, makeStyles, createStyles, Theme, RadioGroup } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
 import React from "react";
 
+const useStyles = makeStyles((theme: Theme) => 
+createStyles({
+    formControl: {
+        minWidth: 120,
+    }
+}));
+
 export default function Search(props) {
+    const classes = useStyles()
     return(
         <Container maxWidth="md">
         <Grid container spacing={3}>
@@ -16,14 +24,26 @@ export default function Search(props) {
                     </Button>
                 </Grid>
             </Grid>
-            <Grid item xs={12}>
-                <Paper>
-                    <form>
-                        {props.filter}
-
-                    </form>
-                    xxxxxxxxxxxxx
-                </Paper>
+            <Grid item xs={12} container>
+                <Grid item xs={6}>
+                    <FormControl component="fieldset">
+                        <FormLabel component="legend">Catégorie</FormLabel>
+                        <RadioGroup aria-label="category" name="category">
+                            <FormControlLabel value="health" control={<Radio />} label="Santé" />
+                            <FormControlLabel value="survival" control={<Radio />} label="Guide de survie" />
+                            <FormControlLabel value="food" control={<Radio />} label="Alimentation" />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel id="search-sort">Trier par</InputLabel>
+                        <Select labelId="search-sort" autoWidth>
+                            <MenuItem value="top">Pertinence</MenuItem>
+                            <MenuItem value="date">Date de publication</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
             </Grid>
             <Grid item xs={12}>
                 <Paper>
