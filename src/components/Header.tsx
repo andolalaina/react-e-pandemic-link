@@ -1,7 +1,6 @@
-import React from 'react';
-
-import { AppBar, Button, createStyles, makeStyles, Paper, Theme, Toolbar, Typography, Tabs, Tab, Grid, Container } from '@material-ui/core';
-import { AccountCircle, Menu } from '@material-ui/icons';
+import { Link as RouterLink} from 'react-router-dom';
+import { Link } from '@material-ui/core';
+import { AppBar, createStyles, makeStyles, Theme, Toolbar, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles((theme: Theme) => createStyles({
   btnActive: {
@@ -21,10 +20,14 @@ export default function App() {
     <header>
       <AppBar position="static">
         <Toolbar className="toolBar">
-          <Typography variant="h6" className={classes.title}>
-            E-pandemic-link
-          </Typography>
-          <Button variant="contained" color="secondary" startIcon={<AccountCircle/>}>Se connecter</Button>
+            <Typography variant="h6" className={classes.title}>
+              <Link component={RouterLink} to="/" color="inherit">
+                  E-pandemic-link
+              </Link>
+            </Typography>
+            <Typography variant="body1">
+              Coded By : RANDRIAJAOSON Michael - ESIIA5
+            </Typography>
         </Toolbar>
       </AppBar>
     </header>

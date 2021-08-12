@@ -1,6 +1,6 @@
 import { Avatar, Card, CardActions, CardContent, CardHeader, createStyles, makeStyles, Theme, Typography } from "@material-ui/core"
 import { Grid, Button } from "@material-ui/core";
-import { Visibility, Favorite } from "@material-ui/icons";
+import { Favorite } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme: Theme) => 
     createStyles({
@@ -20,8 +20,8 @@ export default function Comment(props) {
         className={classes.card}
         >
             <CardHeader
-            avatar={<Avatar src={props.owner.picture.thumbnail}/>}
-            title={<Typography variant="body1">{props.owner.name.first} {props.owner.name.last}</Typography>}/>
+            avatar={<Avatar/>}
+            title={<Typography variant="body1">{props.owner.firstname} {props.owner.lastname}</Typography>}/>
             <CardContent>
                 <Typography variant="caption">{props.commentText}</Typography>
             </CardContent>

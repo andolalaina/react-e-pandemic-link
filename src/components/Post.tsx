@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card, Grid, Container, Avatar, Typography, Button, CardHeader, CardActions, CardContent, Select, MenuItem, InputLabel } from "@material-ui/core";
+import { Card, Grid, Container, Avatar, Typography, Button, CardHeader, CardActions, CardContent } from "@material-ui/core";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import { Favorite, ThumbDown, ThumbUp, Visibility } from '@material-ui/icons';
-import { isClassExpression } from 'typescript';
-
+import { useParams } from 'react-router-dom';
+import { posts, comments, users } from '../database/db.json';
+import Comment from './Comment';
 
 const useStyles = makeStyles((theme: Theme) =>
 createStyles({
@@ -17,24 +17,29 @@ createStyles({
 }),
 );
 
-export default function Post(props) {
+export default function Post() {
     const classes = useStyles();
+    const {post_id} = useParams();
+    const post = posts.find((post) => post.id === post_id);
+    const owner = users.find((user) => user.id === post.owner);
+    const commentList = comments.filter((comment) => comment.post === post.id);
+
     return(
         <Container maxWidth="md">
         <Card variant="outlined" className={classes.card}>
                 <CardHeader
-                avatar={<Avatar src={props.owner.picture.thumbnail}/>}
-                title={<Typography variant="body1">{props.owner.name.first} {props.owner.name.last}</Typography>}
+                avatar={<Avatar/>}
+                title={<Typography variant="body1">{owner.firstname} {owner.lastname}</Typography>}
                 />
                 <CardContent>
                     <Grid container spacing={3}>
                         <Grid item container direction="column" justifyContent="center">
                             <Typography variant="h4">
-                                {props.title}
+                                {post.title}
                             </Typography>
                             <Grid item container justifyContent="flex-start" alignItems="flex-start">
-                                <Button startIcon={<Visibility/>} disabled color="secondary">{props.views}</Button>
-                                <Button startIcon={<Favorite/>} disabled>{props.likes}</Button>
+                                <Button startIcon={<Visibility/>} disabled color="secondary">{post.views}</Button>
+                                <Button startIcon={<Favorite/>} disabled>{post.likes}</Button>
                             </Grid>
                         </Grid>
                         <Grid item container direction="column" justifyContent="center">
@@ -42,18 +47,14 @@ export default function Post(props) {
                                 Description
                             </Typography>
                             <Typography variant="caption">
-                                {props.description}
+                                {post.description}
                             </Typography>
                         </Grid>
                         <Grid item container direction="column" justifyContent="center" spacing={1}>
-                            {props.paragraphes.map((paragraph) => (
-                                <Grid item>
-                                    <Typography variant="body1">
-                                        {paragraph}
-                                    </Typography>
-                                </Grid>
-                            ))}
-                    </Grid>
+                            <Typography variant="body1">
+                                {post.content}
+                            </Typography>
+                        </Grid>
                     </Grid>
                 </CardContent>
                 <CardActions>
@@ -80,19 +81,9 @@ export default function Post(props) {
                     </Grid>
                 </CardActions>
         </Card>
-        
-        <Grid container justifyContent="flex-end" alignItems="center" spacing={2}>
-            <Grid item>
-                <InputLabel id="comments-sort">Trier par</InputLabel>
-            </Grid>
-            <Grid item>
-                <Select labelId="comment-sort">
-                    <MenuItem value="top">Pertinence</MenuItem>
-                    <MenuItem value="date">Date</MenuItem>
-                </Select>
-            </Grid>
-        </Grid>
-        {props.children}
+        {commentList.map((comment) => 
+        (<Comment owner={users.find((user) => user.id === comment.owner)} commentText={comment.commentText} likes={comment.likes}/>)
+        )}
         </Container>
     )
 }
