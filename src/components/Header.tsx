@@ -27,24 +27,6 @@ export default function App() {
           <Button variant="contained" color="secondary" startIcon={<AccountCircle/>}>Se connecter</Button>
         </Toolbar>
       </AppBar>
-      <Paper>
-        <Container maxWidth="md">
-          <Grid container>
-            <Button className={classes.btnActive}>
-              Accueil
-            </Button>
-            <Button>
-              Santé
-            </Button>
-            <Button>
-              Sport
-            </Button>
-            <Button>
-              Guide de Survie
-            </Button>
-          </Grid>
-        </Container>
-      </Paper>
     </header>
   );
 }
